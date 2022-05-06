@@ -39,7 +39,7 @@
   - project structure
   - gotchas
   - anything worth mentioning
-- The project should all modern browsers (current version - 1). IE11 can be omitted.
+- The project should support all modern browsers (current version - 1). IE11 can be omitted.
 - The UI should be responsive.
 - HTML should be semantic.
 
