@@ -3,12 +3,12 @@
     <header>
       <font-awesome-icon
         icon="fa-solid fa-sun"
-        @click="lightMode = !lightMode"
-        v-if="(lightmode = !lightmode)"
+        @click="lightMode = true"
+        v-if="lightMode == false"
       />
       <font-awesome-icon
         icon="fa-solid fa-moon"
-        @click="lightMode = !lightMode"
+        @click="lightMode = false"
         v-else
       />
     </header>
@@ -17,7 +17,16 @@
     </main>
   </div>
 </template>
-
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      lightMode: false,
+    };
+  },
+};
+</script>
 <style lang="scss">
 :root {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -88,13 +97,3 @@ main {
   align-items: center;
 }
 </style>
-<script>
-export default {
-  name: "App",
-  data() {
-    return {
-      lightMode: false,
-    };
-  },
-};
-</script>

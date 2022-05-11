@@ -24,11 +24,6 @@
         </ul>
       </div>
     </div>
-    <!-- <nav>
-      <router-link to="/">Home</router-link> |
-      About</router-link>
-    </nav> 
-     -->
     <router-link to="/checkout-1">
       <button class="checkout">Continue Checkout</button>
     </router-link>
