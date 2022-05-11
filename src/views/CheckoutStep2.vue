@@ -13,25 +13,22 @@
         id="email"
         :class="{ filled: email != '' && error == false }"
       />
-      <span v-if="error">Please enter a valid email address</span>
-      <p>
-        I have read the following
-        <a href="https://www.homeday.de/de/datenschutz/">
-          terms and conditions
-        </a>
-        and lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-        rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-        ipsum dolor sit amet.
-      </p>
-      <label for="terms">Agreed to terms and conditions</label>
-      <input type="checkbox" name="terms" id="terms" />
-      <span v-if="error">Please enter a valid email address</span>
+      <span v-if="error && email == ''">
+        Please enter a valid email address
+      </span>
+      <div>
+        <input type="checkbox" name="terms" id="terms" v-model="terms" />
+        <label for="terms" :class="{ terms: terms == false && termsError }">
+          I have read the terms and conditions and lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+          labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+          et accusam et justo duo dolores et ea rebum. Stet clita kasd
+          gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </label>
+      </div>
     </form>
-    <!-- <router-link to="/checkout-2"> -->
+    <router-link to="/checkout-1" class="backlink"> &#8592; back </router-link>
     <button class="checkout" @click="nextStep()">Continue Checkout</button>
-    <!-- </router-link> -->
   </section>
 </template>
 
@@ -41,6 +38,8 @@ export default {
   data() {
     return {
       error: false,
+      termsError: false,
+      terms: false,
       email: "",
     };
   },
@@ -59,7 +58,17 @@ export default {
     // async and await can be used instead of then.
     async nextStep() {
       if (this.email === "" || this.validEmail === false) {
-        return (this.error = true);
+        this.error = true;
+      } else {
+        this.error = false;
+      }
+      if (this.terms === false) {
+        this.termsError = true;
+      } else {
+        this.termsError = false;
+      }
+      if (this.error || this.termsError) {
+        return false;
       }
       await this.$store.dispatch("fetchUserData", {
         firstName: this.$store.state.user.firstName,
@@ -95,7 +104,7 @@ input {
   height: 2rem;
   padding: 0.3rem 0.7rem;
   outline: none;
-  border: none;
+  border: 1px solid lightgrey;
   background-color: lightgrey;
   border-radius: 8px;
   font-size: inherit;
@@ -107,11 +116,17 @@ input.filled {
   border: 1px solid #00ff08;
   background-color: #deffe7;
 }
-form > #terms {
-  justify-self: flex-start;
+label.terms {
+  color: red;
 }
-label:first-of-type {
-  margin: 0 0 1rem 0;
+form div {
+  display: flex;
+  flex-direction: row;
+}
+input#terms {
+  margin: 1rem 1rem 1rem 0;
+  width: 10%;
+  cursor: pointer;
 }
 label {
   display: flex;
@@ -119,19 +134,17 @@ label {
   align-items: center;
   font-weight: bold;
 }
+label[for="terms"] {
+  font-weight: normal;
+}
 form span {
   display: block;
   margin-top: 0.8rem;
   color: red;
   font-style: italic;
 }
-a,
-a:active {
-  color: orange;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
+a.backlink {
+  margin-right: 1rem;
 }
 .checkout {
   background-image: var(--inverted-background);

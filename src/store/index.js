@@ -16,6 +16,10 @@ export default new Vuex.Store({
     SET_GITHUB_DATA(state, githubData) {
       state.githubData = githubData;
     },
+    RESET_DATA(state) {
+      state.user = {};
+      state.githubData = {};
+    },
   },
   actions: {
     fetchUserData({ commit }, userData) {
@@ -32,6 +36,9 @@ export default new Vuex.Store({
           console.warn(error);
           this.isThereAValidationError = true;
         });
+    },
+    resetData({ commit }) {
+      commit("RESET_DATA");
     },
   },
   modules: {},

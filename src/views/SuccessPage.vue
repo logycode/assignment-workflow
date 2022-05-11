@@ -1,20 +1,30 @@
 <template>
   <section>
-    <h1>Success!</h1>
-    <h3>Your order has been placed successfully.</h3>
-    <p>Your entered data:</p>
-    <ul>
-      <li v-for="(value, key) in $store.state.user" :key="key">
-        {{ key }} : {{ value }}
-      </li>
-    </ul>
-    <img src="" alt="" />
+    <h1>Thank you for your purchase, {{ $store.state.user.firstName }}</h1>
+    <h3>Your provided data</h3>
+    <div>
+      <img :src="$store.state.githubData.avatar_url" alt="" />
+      <ul>
+        <li v-for="(value, key) in $store.state.user" :key="key">
+          <b> {{ key }} : </b> {{ value }}
+        </li>
+      </ul>
+    </div>
+    <button @click="resetStates">Start Over</button> &#128260;
   </section>
 </template>
 
 <script>
 export default {
   name: "SuccessPage",
+  methods: {
+    resetStates() {
+      this.$store.dispatch("resetData", {});
+      this.$router.push({
+        path: "/",
+      });
+    },
+  },
 };
 </script>
 
@@ -29,24 +39,38 @@ section {
   // offset-x | offset-y | blur-radius | spread-radius | color
   box-shadow: 0px 0px 25px 1px var(--shadow-color);
 }
-p,
-ul {
+div {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+p {
   text-align: left;
 }
-.checkout {
-  background-image: var(--inverted-background);
-  width: 50%;
-  padding: 2em;
-  margin-bottom: 28px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  box-shadow: var(--shadow-color);
-  color: var(--inverted-text);
-  font-weight: bold;
+ul {
+  margin: 0 -2rem;
+  text-align: left;
+  list-style-type: none;
 }
-.checkout:hover {
-  box-shadow: var(--third-background) 0 1px 30px;
-  transition-duration: 0.2s;
+img {
+  display: block;
+  width: 15%;
+  margin-right: 2rem;
+  border-radius: 100%;
+}
+button {
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  color: orange;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover {
+  background: none;
+  border: none;
+  color: orange;
+  text-decoration: underline;
 }
 </style>

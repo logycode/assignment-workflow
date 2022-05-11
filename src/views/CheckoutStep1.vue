@@ -36,9 +36,12 @@
         Please enter your Github user name
       </span>
     </form>
-    <!-- <router-link to="/checkout-2"> -->
-    <button class="checkout" @click="nextStep()">Continue Checkout</button>
-    <!-- </router-link> -->
+    <div>
+      <router-link to="/checkout-1" class="backlink">
+        &#8592; back
+      </router-link>
+      <button class="checkout" @click="nextStep()">Continue Checkout</button>
+    </div>
   </section>
 </template>
 
@@ -128,6 +131,9 @@ form span {
   margin-top: 0.8rem;
   color: red;
   font-style: italic;
+}
+a.backlink {
+  margin-right: 1rem;
 }
 .checkout {
   background-image: var(--inverted-background);

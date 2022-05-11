@@ -96,4 +96,12 @@ main {
   justify-content: center;
   align-items: center;
 }
+a,
+a:active {
+  color: orange;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
 </style>
