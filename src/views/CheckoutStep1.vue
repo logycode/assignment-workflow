@@ -11,18 +11,18 @@
         type="text"
         name="first-name"
         id="first-name"
-        :class="{ filled: firstName != '' }"
+        :class="{ filled: firstName }"
       />
-      <span v-if="error && firstName == ''">Please enter your first name</span>
+      <span v-if="error && !firstName">Please enter your first name</span>
       <label for="last-name">Your last Name*</label>
       <input
         v-model="lastName"
         type="text"
         name="last-name"
         id="last-name"
-        :class="{ filled: lastName != '' }"
+        :class="{ filled: lastName }"
       />
-      <span v-if="error && lastName == ''">Please enter your last name</span>
+      <span v-if="error && !lastName">Please enter your last name</span>
 
       <label for="github-user">Your Github User Name*</label>
       <input
@@ -30,17 +30,21 @@
         type="text"
         name="github-user"
         id="github-user"
-        :class="{ filled: githubUserName != '' }"
+        :class="{ filled: githubUserName }"
       />
-      <span v-if="error && githubUserName == ''">
+      <span v-if="error && !githubUserName">
         Please enter your Github user name
       </span>
     </form>
     <div>
-      <router-link to="/checkout-1" class="backlink">
-        &#8592; back
-      </router-link>
-      <button class="checkout" @click="nextStep()">Continue Checkout</button>
+      <router-link to="/" class="backlink"> &#8592; back </router-link>
+      <button
+        class="checkout"
+        @click="nextStep()"
+        :disabled="error && !isStepValid"
+      >
+        Continue Checkout
+      </button>
     </div>
   </section>
 </template>
@@ -51,20 +55,55 @@ export default {
   data() {
     return {
       error: false,
-      firstName: "",
-      lastName: "",
-      githubUserName: "",
     };
+  },
+  computed: {
+    firstName: {
+      get() {
+        return this.$store.state.user?.firstName;
+      },
+      set(newValue) {
+        this.$store.dispatch("fetchUserData", {
+          ...this.$store.state.user,
+          firstName: newValue,
+        });
+      },
+    },
+    lastName: {
+      get() {
+        return this.$store.state.user?.lastName;
+      },
+      set(newValue) {
+        this.$store.dispatch("fetchUserData", {
+          ...this.$store.state.user,
+          lastName: newValue,
+        });
+      },
+    },
+    githubUserName: {
+      get() {
+        return this.$store.state.user?.githubUserName;
+      },
+      set(newValue) {
+        this.$store.dispatch("fetchUserData", {
+          ...this.$store.state.user,
+          githubUserName: newValue,
+        });
+      },
+    },
+    isStepValid() {
+      if (!this.firstName) return false;
+      if (!this.lastName) return false;
+      if (!this.githubUserName) return false;
+      return true;
+    },
   },
   methods: {
     // async and await can be used instead of then.
     async nextStep() {
-      if (
-        this.firstName === "" ||
-        this.lastName === "" ||
-        this.githubUserName === ""
-      ) {
-        return (this.error = true);
+      if (!this.isStepValid) {
+        this.error = true;
+        return false;
       }
       await this.$store.dispatch("fetchUserData", {
         firstName: this.firstName,
@@ -77,6 +116,7 @@ export default {
       this.$router.push({
         name: "CheckoutStep2",
       });
+      return (this.error = false);
     },
   },
 };
@@ -150,5 +190,13 @@ a.backlink {
 .checkout:hover {
   box-shadow: var(--third-background) 0 1px 30px;
   transition-duration: 0.2s;
+}
+.checkout:disabled {
+  background-image: none;
+  cursor: default;
+}
+.checkout:disabled:hover {
+  background-image: none;
+  box-shadow: none;
 }
 </style>

@@ -11,14 +11,14 @@
         type="email"
         name="email"
         id="email"
-        :class="{ filled: email != '' && error == false }"
+        :class="{ filled: email != '' }"
       />
-      <span v-if="error && email == ''">
+      <span v-if="isErrorsVisible && !isEmailValid">
         Please enter a valid email address
       </span>
       <div>
         <input type="checkbox" name="terms" id="terms" v-model="terms" />
-        <label for="terms" :class="{ terms: terms == false && termsError }">
+        <label for="terms" :class="{ terms: isErrorsVisible && !terms }">
           I have read the terms and conditions and lorem ipsum dolor sit amet,
           consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
           labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
@@ -37,39 +37,48 @@ export default {
   name: "CheckoutStep2",
   data() {
     return {
-      error: false,
-      termsError: false,
       terms: false,
+      isErrorsVisible: false,
       email: "",
     };
   },
   computed: {
-    validEmail() {
+    isEmailValid() {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (this.email.match(re)) {
-        return true;
-      }
-      this.error == true;
-      return false;
+      if (!this.email.match(re) || this.email === "") return false;
+      return true;
+    },
+    areTermsAccepted() {
+      if (!this.terms) return false;
+
+      return true;
+    },
+    isStepValid() {
+      if (!this.isEmailValid) return false;
+      if (!this.areTermsAccepted) return false;
+
+      return true;
     },
   },
   methods: {
     // async and await can be used instead of then.
     async nextStep() {
-      if (this.email === "" || this.validEmail === false) {
-        this.error = true;
-      } else {
-        this.error = false;
-      }
-      if (this.terms === false) {
-        this.termsError = true;
-      } else {
-        this.termsError = false;
-      }
-      if (this.error || this.termsError) {
-        return false;
-      }
+      // if (this.email === "" || this.validEmail === false) {
+      //   this.error = true;
+      // } else {
+      //   this.error = false;
+      // }
+      // if (this.terms === false) {
+      //   this.termsError = true;
+      // } else {
+      //   this.termsError = false;
+      // }
+      // if (this.error || this.termsError) {
+      //   return false;
+      // }
+      this.isErrorsVisible = true;
+      if (!this.isStepValid) return false;
       await this.$store.dispatch("fetchUserData", {
         firstName: this.$store.state.user.firstName,
         lastName: this.$store.state.user.lastName,
