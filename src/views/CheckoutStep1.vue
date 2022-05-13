@@ -105,14 +105,14 @@ export default {
         this.error = true;
         return false;
       }
-      await this.$store.dispatch("fetchUserData", {
+      this.$store.dispatch("fetchUserData", {
         firstName: this.firstName,
         lastName: this.lastName,
         githubUserName: this.githubUserName,
       });
-      this.$store.dispatch("fetchGithubData", {
-        githubData: this.githubData,
-      });
+      // this.$store.dispatch("fetchGithubData", {
+      //   githubData: this.githubData,
+      // });
       this.$router.push({
         name: "CheckoutStep2",
       });

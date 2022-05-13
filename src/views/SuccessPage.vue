@@ -1,12 +1,12 @@
 <template>
   <section>
-    <h1>Thank you for your purchase, {{ $store.state.user.firstName }}</h1>
+    <h1>Thank you for your purchase, {{ this.$store.state.user.firstName }}</h1>
     <h3>Your provided data</h3>
     <div>
-      <img :src="$store.state.githubData.avatar_url" alt="" />
+      <img :src="githubAvatar" alt="" />
       <ul>
         <li v-for="(value, key) in $store.state.user" :key="key">
-          <b> {{ key }} : </b> {{ value }}
+          <b> {{ key }}: </b> {{ value }}
         </li>
       </ul>
     </div>
@@ -15,8 +15,14 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "SuccessPage",
+  data() {
+    return {
+      githubAvatar: "",
+    };
+  },
   methods: {
     resetStates() {
       this.$store.dispatch("resetData", {});
@@ -24,6 +30,18 @@ export default {
         path: "/",
       });
     },
+  },
+  created() {
+    axios
+      .get(
+        "https://api.github.com/users/" + this.$store.state.user.githubUserName
+      )
+      .then((response) => {
+        return (this.githubAvatar = response.data.avatar_url);
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
   },
 };
 </script>
