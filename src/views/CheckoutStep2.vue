@@ -33,7 +33,7 @@
       @click="nextStep()"
       :disabled="error && !isStepValid"
     >
-      Continue Checkout
+      Place Order
     </button>
   </section>
 </template>

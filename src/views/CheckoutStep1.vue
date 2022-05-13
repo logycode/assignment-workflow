@@ -194,6 +194,9 @@ a.backlink {
 .checkout:disabled {
   background-image: none;
   cursor: default;
+  color: darkgrey;
+  font-weight: normal;
+  background-color: lightgray;
 }
 .checkout:disabled:hover {
   background-image: none;
