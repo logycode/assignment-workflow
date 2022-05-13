@@ -13,12 +13,12 @@
         id="email"
         :class="{ filled: email != '' }"
       />
-      <span v-if="isErrorsVisible && !isEmailValid">
+      <span v-if="error && !isEmailValid">
         Please enter a valid email address
       </span>
       <div>
         <input type="checkbox" name="terms" id="terms" v-model="terms" />
-        <label for="terms" :class="{ terms: isErrorsVisible && !terms }">
+        <label for="terms" :class="{ terms: error && !terms }">
           I have read the terms and conditions and lorem ipsum dolor sit amet,
           consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
           labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
@@ -28,7 +28,13 @@
       </div>
     </form>
     <router-link to="/checkout-1" class="backlink"> &#8592; back </router-link>
-    <button class="checkout" @click="nextStep()">Continue Checkout</button>
+    <button
+      class="checkout"
+      @click="nextStep()"
+      :disabled="error && !isStepValid"
+    >
+      Continue Checkout
+    </button>
   </section>
 </template>
 
@@ -38,7 +44,7 @@ export default {
   data() {
     return {
       terms: false,
-      isErrorsVisible: false,
+      error: false,
       email: "",
     };
   },
@@ -57,32 +63,18 @@ export default {
     isStepValid() {
       if (!this.isEmailValid) return false;
       if (!this.areTermsAccepted) return false;
-
       return true;
     },
   },
   methods: {
     // async and await can be used instead of then.
     async nextStep() {
-      // if (this.email === "" || this.validEmail === false) {
-      //   this.error = true;
-      // } else {
-      //   this.error = false;
-      // }
-      // if (this.terms === false) {
-      //   this.termsError = true;
-      // } else {
-      //   this.termsError = false;
-      // }
-      // if (this.error || this.termsError) {
-      //   return false;
-      // }
-      this.isErrorsVisible = true;
-      if (!this.isStepValid) return false;
+      if (!this.isStepValid) {
+        this.error = true;
+        return false;
+      }
       await this.$store.dispatch("fetchUserData", {
-        firstName: this.$store.state.user.firstName,
-        lastName: this.$store.state.user.lastName,
-        githubUserName: this.$store.state.user.githubUserName,
+        ...this.$store.state.user,
         email: this.email,
       });
       this.$router.push({
@@ -170,5 +162,13 @@ a.backlink {
 .checkout:hover {
   box-shadow: var(--third-background) 0 1px 30px;
   transition-duration: 0.2s;
+}
+.checkout:disabled {
+  background-image: none;
+  cursor: default;
+}
+.checkout:disabled:hover {
+  background-image: none;
+  box-shadow: none;
 }
 </style>
