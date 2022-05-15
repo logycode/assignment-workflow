@@ -99,7 +99,6 @@ export default {
     },
   },
   methods: {
-    // async and await can be used instead of then.
     async nextStep() {
       if (!this.isStepValid) {
         this.error = true;
@@ -110,9 +109,6 @@ export default {
         lastName: this.lastName,
         githubUserName: this.githubUserName,
       });
-      // this.$store.dispatch("fetchGithubData", {
-      //   githubData: this.githubData,
-      // });
       this.$router.push({
         name: "CheckoutStep2",
       });
@@ -121,25 +117,21 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
 section {
   width: 50%;
   padding: 2rem 5rem;
   background-color: var(--second-background);
   border-radius: 10px;
-
-  // box-shadow parameters:
-  // offset-x | offset-y | blur-radius | spread-radius | color
   box-shadow: 0px 0px 25px 1px var(--shadow-color);
 }
 form {
   padding: 2rem;
-  text-align: left;
 }
 input {
+  box-sizing: border-box;
   width: 100%;
-  height: 2rem;
+  height: 3rem;
   padding: 0.3rem 0.7rem;
   outline: none;
   border: 1px solid lightgrey;
@@ -201,5 +193,30 @@ a.backlink {
 .checkout:disabled:hover {
   background-image: none;
   box-shadow: none;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 740px) {
+  section {
+    width: 100%;
+    padding: 3.5rem;
+    border-radius: 0;
+  }
+  form {
+    padding: 2rem 0;
+  }
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .checkout {
+    width: 100%;
+  }
+}
+@media only screen and (min-device-width: 741px) and (max-device-width: 1200px) {
+  section {
+    width: 70%;
+    padding: 3.5rem;
+    border-radius: 0;
+  }
 }
 </style>

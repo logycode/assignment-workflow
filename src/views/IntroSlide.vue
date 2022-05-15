@@ -24,8 +24,8 @@
         </ul>
       </div>
     </div>
-    <router-link to="/checkout-1">
-      <button class="checkout">Continue Checkout</button>
+    <router-link to="/checkout-1" class="checkout">
+      Continue Checkout
     </router-link>
   </section>
 </template>
@@ -42,9 +42,6 @@ section {
   padding: 2rem 5rem;
   background-color: var(--second-background);
   border-radius: 10px;
-
-  // box-shadow parameters:
-  // offset-x | offset-y | blur-radius | spread-radius | color
   box-shadow: 0px 0px 25px 1px var(--shadow-color);
 }
 .steps {
@@ -53,7 +50,7 @@ section {
   margin: 70px 0;
 }
 .step {
-  width: 30%;
+  width: 40%;
   background: var(--second-background);
   box-shadow: 0px 0px 8px 1px var(--shadow-color);
   border-radius: 10px;
@@ -72,19 +69,60 @@ section {
   line-height: 2rem;
 }
 .checkout {
+  display: block;
   background-image: var(--inverted-background);
   width: 50%;
   padding: 2em;
-  margin-bottom: 28px;
+  margin: 28px auto;
   border: none;
   border-radius: 10px;
   font-size: 1rem;
   box-shadow: var(--shadow-color);
   color: var(--inverted-text);
   font-weight: bold;
+  text-decoration: none;
 }
 .checkout:hover {
   box-shadow: var(--third-background) 0 1px 30px;
   transition-duration: 0.2s;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  section {
+    width: 100%;
+    padding: 3.5rem;
+    border-radius: 0;
+  }
+  .steps {
+    flex-direction: column;
+  }
+  .step {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 740px) {
+  section {
+    width: 100%;
+    padding: 3.5rem;
+    border-radius: 0;
+  }
+  .steps {
+    flex-direction: column;
+  }
+  .step {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
+@media only screen and (min-device-width: 741px) and (max-device-width: 1200px) {
+  section {
+    width: 70%;
+    padding: 3.5rem;
+    border-radius: 0;
+  }
+  .step {
+    width: 70%;
+    margin: 1rem;
+  }
 }
 </style>

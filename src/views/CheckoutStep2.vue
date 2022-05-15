@@ -11,7 +11,7 @@
         type="email"
         name="email"
         id="email"
-        :class="{ filled: email != '' }"
+        :class="{ filled: isEmailValid }"
       />
       <span v-if="error && !isEmailValid">
         Please enter a valid email address
@@ -23,7 +23,7 @@
           consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
           labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
           et accusam et justo duo dolores et ea rebum. Stet clita kasd
-          gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.*
         </label>
       </div>
     </form>
@@ -67,7 +67,6 @@ export default {
     },
   },
   methods: {
-    // async and await can be used instead of then.
     async nextStep() {
       if (!this.isStepValid) {
         this.error = true;
@@ -91,9 +90,6 @@ section {
   padding: 2rem 5rem;
   background-color: var(--second-background);
   border-radius: 10px;
-
-  // box-shadow parameters:
-  // offset-x | offset-y | blur-radius | spread-radius | color
   box-shadow: 0px 0px 25px 1px var(--shadow-color);
 }
 form {
@@ -126,7 +122,8 @@ form div {
 }
 input#terms {
   margin: 1rem 1rem 1rem 0;
-  width: 10%;
+  min-width: 18px;
+  max-width: 6%;
   cursor: pointer;
 }
 label {
@@ -166,9 +163,37 @@ a.backlink {
 .checkout:disabled {
   background-image: none;
   cursor: default;
+  color: darkgrey;
+  font-weight: normal;
+  background-color: lightgray;
 }
 .checkout:disabled:hover {
   background-image: none;
   box-shadow: none;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 740px) {
+  section {
+    width: 100%;
+    padding: 3.5rem;
+    border-radius: 0;
+  }
+  form {
+    padding: 2rem 0;
+  }
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .checkout {
+    width: 100%;
+  }
+}
+@media only screen and (min-device-width: 741px) and (max-device-width: 1200px) {
+  section {
+    width: 70%;
+    padding: 3.5rem;
+    border-radius: 0;
+  }
 }
 </style>

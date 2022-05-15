@@ -22,7 +22,7 @@ export default {
   name: "App",
   data() {
     return {
-      lightMode: false,
+      lightMode: true,
     };
   },
 };
@@ -52,7 +52,7 @@ button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  //set variables for default mode (dark)
+  //set variables for dark mode
   --background-color: linear-gradient(90deg, #000718 0%, #004654 100%);
   --second-background: #000718;
   --third-background: lightgrey;
@@ -67,7 +67,7 @@ button {
   background: var(--background-color);
 }
 #app[light="true"] {
-  //set variables when light mode toggled
+  //set variables for light mode
   --background-color: linear-gradient(90deg, white 40%, lightgrey 100%);
   --second-background: white;
   --third-background: #004654;
@@ -76,18 +76,6 @@ button {
   --inverted-background: linear-gradient(90deg, #000718 0%, #004654 100%);
   --inverted-text: rgb(245, 245, 245);
   --mode-shadow: darkblue;
-}
-
-// Styles applying to the fontawesome icon
-.svg-inline--fa {
-  margin: 10px;
-  position: absolute;
-  right: 1%;
-  top: 1%;
-  border: none;
-  color: var(--text-color);
-  font-size: 1.2rem;
-  cursor: pointer;
 }
 main {
   margin: 0px auto;
@@ -103,5 +91,16 @@ a:active {
 }
 a:hover {
   text-decoration: underline;
+}
+// Styles applying to the fontawesome icon
+.svg-inline--fa {
+  margin: 10px;
+  position: absolute;
+  right: 1%;
+  top: 1%;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 </style>
