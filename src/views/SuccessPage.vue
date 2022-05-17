@@ -25,7 +25,9 @@
 </template>
 
 <script>
+// use axios client for calling the Github API
 import axios from "axios";
+// use lodash library to make use of _.isEmpty function and check for empty objects
 import _ from "lodash";
 export default {
   name: "SuccessPage",

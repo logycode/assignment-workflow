@@ -50,6 +50,7 @@ export default {
   },
   computed: {
     isEmailValid() {
+      // use regular expression to validate if a correct email address was entered
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!this.email.match(re) || this.email === "") return false;
@@ -97,8 +98,9 @@ form {
   text-align: left;
 }
 input {
+  box-sizing: border-box;
   width: 100%;
-  height: 2rem;
+  height: 3rem;
   padding: 0.3rem 0.7rem;
   outline: none;
   border: 1px solid lightgrey;
@@ -124,6 +126,7 @@ input#terms {
   margin: 1rem 1rem 1rem 0;
   min-width: 18px;
   max-width: 6%;
+  height: 2rem;
   cursor: pointer;
 }
 label {
