@@ -61,6 +61,7 @@ button {
   --inverted-background: linear-gradient(90deg, white 40%, lightgrey 100%);
   --inverted-text: #000718;
   --mode-shadow: white;
+  --link-color: orange;
 
   //init variables
   color: var(--text-color);
@@ -76,6 +77,7 @@ button {
   --inverted-background: linear-gradient(90deg, #000718 0%, #004654 100%);
   --inverted-text: rgb(245, 245, 245);
   --mode-shadow: darkblue;
+  --link-color: #004654;
 }
 main {
   margin: 0px auto;
@@ -86,7 +88,8 @@ main {
 }
 a,
 a:active {
-  color: orange;
+  color: var(--link-color);
+  font-weight: 800;
   text-decoration: none;
 }
 a:hover {

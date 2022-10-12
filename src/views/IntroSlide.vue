@@ -1,15 +1,14 @@
 <template>
   <section>
     <h1>Checkout</h1>
-    <h3>
+    <h2>
       You can checkout your selected items in the next steps. <br />
       All we need are the following data. Please fill out the forms and adhere
       to the mandatory fields respectively. Thank you.
-    </h3>
+    </h2>
     <div class="steps">
       <div class="step">
-        <h4>1st Step</h4>
-        <div></div>
+        <h3>1st Step</h3>
         <ul>
           <li>First Name</li>
           <li>Last Name</li>
@@ -17,7 +16,7 @@
         </ul>
       </div>
       <div class="step">
-        <h4>2nd Step</h4>
+        <h3>2nd Step</h3>
         <ul>
           <li>E-Mail Address</li>
           <li>Agreement of Terms and Conditions</li>
@@ -55,7 +54,7 @@ section {
   box-shadow: 0px 0px 8px 1px var(--shadow-color);
   border-radius: 10px;
 }
-.step h4 {
+.step h3 {
   display: inline-block;
   padding-bottom: 0.8rem;
   margin-bottom: 0;

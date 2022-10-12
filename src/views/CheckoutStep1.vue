@@ -1,9 +1,9 @@
 <template>
   <section>
     <h1>Personal Data</h1>
-    <h3>
+    <h2>
       Please provide your personal data. Fields marked with * are mandatory.
-    </h3>
+    </h2>
     <form>
       <label for="first-name">Your first Name* </label>
       <input

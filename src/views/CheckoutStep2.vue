@@ -1,11 +1,11 @@
 <template>
   <section>
     <h1>Terms & Conditions</h1>
-    <h3>
+    <h2>
       Please provide your email address and accept the terms and conditions.
-    </h3>
+    </h2>
     <form>
-      <label for="mail-address">Your mail* </label>
+      <label for="email">Your mail* </label>
       <input
         v-model="email"
         type="email"

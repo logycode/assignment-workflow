@@ -1,9 +1,7 @@
 <template>
   <section>
     <div v-if="isDataAvailable">
-      <h1>
-        Thank you for your purchase, {{ this.$store.state.user.firstName }}
-      </h1>
+      <h1>Thank you for your purchase, {{ firstName }}</h1>
       <h2>Your provided data</h2>
       <div class="data-response">
         <figure v-if="doesUserExist">
@@ -42,6 +40,9 @@ export default {
       if (_.isEmpty(this.$store.state.user)) return false;
 
       return true;
+    },
+    firstName() {
+      return this.$store.state.user.firstName;
     },
   },
   methods: {
@@ -110,7 +111,8 @@ button {
   border: none;
   font-size: inherit;
   font-family: inherit;
-  color: orange;
+  color: var(--link-color);
+  font-weight: 800;
   text-decoration: none;
   cursor: pointer;
 }
