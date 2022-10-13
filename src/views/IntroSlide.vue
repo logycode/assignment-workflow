@@ -85,7 +85,7 @@ section {
   box-shadow: var(--third-background) 0 1px 30px;
   transition-duration: 0.2s;
 }
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (min-width: 320px) and (max-width: 480px) {
   section {
     width: 100%;
     padding: 3.5rem;
@@ -99,7 +99,7 @@ section {
     margin: 1rem 0;
   }
 }
-@media only screen and (min-device-width: 481px) and (max-device-width: 740px) {
+@media only screen and (min-width: 481px) and (max-width: 740px) {
   section {
     width: 100%;
     padding: 3.5rem;
@@ -113,7 +113,7 @@ section {
     margin: 1rem 0;
   }
 }
-@media only screen and (min-device-width: 741px) and (max-device-width: 1200px) {
+@media only screen and (min-width: 741px) and (max-width: 1200px) {
   section {
     width: 70%;
     padding: 3.5rem;
