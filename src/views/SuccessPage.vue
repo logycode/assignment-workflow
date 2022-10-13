@@ -122,7 +122,7 @@ button:hover {
   color: orange;
   text-decoration: underline;
 }
-@media only screen and (min-device-width: 320px) and (max-device-width: 740px) {
+@media only screen and (min-width: 320px) and (max-width: 740px) {
   section {
     width: 100%;
     padding: 3.5rem;
@@ -133,7 +133,7 @@ button:hover {
     flex-direction: column;
   }
 }
-@media only screen and (min-device-width: 741px) and (max-device-width: 1200px) {
+@media only screen and (min-width: 741px) and (max-width: 1200px) {
   section {
     width: 70%;
     padding: 3.5rem;
