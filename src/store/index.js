@@ -5,7 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: {},
+    user: {
+      firstName: "",
+      lastName: "",
+      githubUserName: "",
+      email: "",
+    },
   },
   mutations: {
     SET_USER_DATA(state, user) {
